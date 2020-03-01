@@ -1,10 +1,12 @@
-package pl.edu.agh.hangman;
+package pl.edu.agh.hangman.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Hangman {
 	
@@ -16,7 +18,7 @@ public class Hangman {
 	
 	public void readFile() throws IOException{
 		try {
-			File file = new File ("C:\\Users\\student14\\Desktop\\Hangman\\java-hangman\\src\\main\\resourcesSlowa.txt");		
+			File file = new File ("C:\\Users\\student18\\Desktop\\Ewa\\java-hangman\\src\\main\\resources.txt");		
 			fileReader = new FileReader(file);
 			bufferedReader = new BufferedReader(fileReader);
 			String line = null;
@@ -116,11 +118,12 @@ public String  fullDrowing() {
                     " /|\\  |\n" +
                     " / \\  |\n" +
                     "      |\n" +
-
-                    "========"
+                    "========";
     }
     
-// public void runGame() {
+
+// public void scanLetter() {
+
 //    	
 //    	ArrayList<String> words = new ArrayList<>();
 //    	for (int i=0; i<word.length(); i++) {
@@ -136,50 +139,76 @@ public String  fullDrowing() {
 //    		}
 //    	}
 //    }
-    
+
+	int tries = 6;
+	int currentTries = 0;
+
+	//skanowanie litery
+	public void scanLetter() {
+		 
+		Scanner scanner = new Scanner(System.in);
+		String inputLetter = scanner.nextLine();
+	}
+
     //przypisywanie slow z pliku (wczytanie pliku w innej klasie) do Listy
-    public ArrayList<String> getListOfWords() {
+    public ArrayList<String> getListOfWords(BufferedReader bufferedReader) {
     	ArrayList<String> words = new ArrayList<>();
     	String line = null;
     	while((line = bufferedReader.readLine()) != null) {
     		words.add(line);
     	}
+    	return words;
     }
     
     //pobieranie losowego slowa z Listy
-    public String getRandomWord() {
+    public String getRandomWord(ArrayList<String> words) {
     	Random random = new Random();
-    	String randomIndex = random.nextInt(words.size());	
+    	int wordsSize = words.length();
+    	String randomIndex = random.nextInt(0,wordsSize);	
     	String word = words.get(randomIndex);
     	return word;
     }
     
     //ile liter ma slowo
-    public int countLeters() {
+    public int countLeters(String word) {
     	return word.length();
     }
     
     //przypisanie kresek do dlugosci slowa
-    public void printDashes() {
+    public void printDashes(String word) {
     	for (int i=0; i<word.length(); i++) {
     		System.out.println("_");
     	}
     }
     
     //sprawdzenie litery
-    public boolean checkLetter(String inputLetter) {
-    	ArrayList<String> letterSet = new ArrayList<>();
+    public boolean checkLetter(String inputLetter, String word) {
+    	boolean check = false;
+    	ArrayList<String> letterList = new ArrayList<>();
     	for (int i=0; i<word.length(); i++) {
-    		letterList.add(word[i]);
+    		letterList.add(word.get(i));
     	}
-    	if (letterSet.contains(inputLetter)) {
-    		
+    	if (letterList.contains(inputLetter)) {
+    		return true;
     	}
-    	
+    }
     
+    //zastapienie kreski trafiona litera
+    public void printDashesWithLetter(ArrayList<String> letterList, String inputLetter) {
+    	 for (int i=0; i<letterList.size(); i++) {
+    		 if (inputLetter.equals(letterList.get(i)) {
+    			 System.out.println(inputLetter);
+    		 }
+    		 else {
+    			 System.out.println("_");
+    			 drawHangMan();
+    		 }
+    	 }
     }
 
 
     public static void main(String[] args) {
+    	readFile();
+    	printDashes(getRandomWord(getListOfWords(bufferedReader)));
     }
 }
