@@ -101,11 +101,12 @@ public class Hangman {
     		System.out.println("_");
     	}
     }
-
-    public boolean checkLetter() {
-    	HashSet<String> letterSet = new HashSet<>();
+    
+    //sprawdzenie litery
+    public boolean checkLetter(String inputLetter) {
+    	ArrayList<String> letterSet = new ArrayList<>();
     	for (int i=0; i<word.length(); i++) {
-    		letterSet.add(word[i]);
+    		letterList.add(word[i]);
     	}
     	if (letterSet.contains(inputLetter)) {
     		
