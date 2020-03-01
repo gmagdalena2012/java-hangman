@@ -1,5 +1,7 @@
 package pl.edu.agh.hangman;
 
+import java.util.HashSet;
+
 public class Hangman {
 
     public static final String[] HANGMANPICS = new String[]{
@@ -71,7 +73,7 @@ public class Hangman {
 //    	}
 //    }
     
-    //przypisywanie slow z pliku (z innej klasy) do Listy
+    //przypisywanie slow z pliku (wczytanie pliku w innej klasie) do Listy
     public ArrayList<String> getListOfWords() {
     	ArrayList<String> words = new ArrayList<>();
     	String line = null;
@@ -100,9 +102,17 @@ public class Hangman {
     	}
     }
 
+    public boolean checkLetter() {
+    	HashSet<String> letterSet = new HashSet<>();
+    	for (int i=0; i<word.length(); i++) {
+    		letterSet.add(word[i]);
+    	}
+    	if (letterSet.contains(inputLetter)) {
+    		
+    	}
+    	
     
-    //public booleam checkLetter() {	
-    //}
+    }
 
     public static void main(String[] args) {
     }
